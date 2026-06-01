@@ -1,6 +1,7 @@
 const express =require('express');
 const path =require('path');
 const app = express();
+const port = process.env.PORT || 8000;
 
 //setup static  folder
 
@@ -18,11 +19,24 @@ let posts =[
     {id:2, title:'Post Two'},
     {id:3, title:'Post Three'}
 ]
-
+//Get all posts 
 app.get('/api/posts',(req,res)=>{
+    const limit =parseInt(req.query.limit)
+   //console.log(req.query);
+   if(!NaN(limit) && limit >0){
+    res.json(posts.slice(0,limit));
+   }else {
     res.json(posts);
+   }
+    
 })
-app.listen(8000,()=>
+
+//Get a single post 
+app.get('/api/posts/:id',(req,res)=>{
+    const id =parseInt(req.params.id)
+    res.json(posts.filter((posts)=>posts.id===id));
+})
+app.listen(port,()=>
 {
-    console.log(`Server listening on port 8000`);
+    console.log(`Server listening on port ${port}`);
 })
