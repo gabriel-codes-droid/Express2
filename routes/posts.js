@@ -1,4 +1,4 @@
-const express =require('express')
+import express from 'express';
 const router = express.Router()
 let posts =[
     {id:1, title:'Post One'},
@@ -29,4 +29,4 @@ router.get('/:id',(req,res)=>{
         res.status(200).json(post);
     
 });
-export default router;
+module.exports = router;
