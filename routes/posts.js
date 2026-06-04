@@ -5,12 +5,7 @@ let posts =[
     {id:2, title:'Post Two'},
     {id:3, title:'Post Three'}
 ];
-const logger =(req,res,next)=>{
-    console.log(`
-        ${req.method} ${req.protocol}://${req.get(host)}${ewq.originalURL}`
-     );
-    next();
-}
+
 //Get all posts 
 router.get('/',(req,res)=>{
     const limit =parseInt(req.query.limit)
@@ -29,7 +24,6 @@ router.get('/:id',(req,res,next)=>{
     // res.json(posts.filter((posts)=>posts.id===id));
     const post =posts.find((post) => post.id===id);
     if (!post){
-        return res
          const error= new Error(`A post with the id ${id} was not found`);
           return next(error)
     }
