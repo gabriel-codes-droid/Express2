@@ -5,6 +5,7 @@ const port = process.env.PORT || 8000;
 import posts from './routes/posts.js';
 import logger from './middleware/logger.js'
 import errorHandler from './middleware/error.js';
+import notFound from './middleware/notFound.js';
 
 //setup static  folder
 
@@ -28,8 +29,13 @@ app.use(logger);
 //Routes
 app.use('/api/posts',posts);
 
+
+
+
 //Error handler
+app.use(notFound);
 app.use(errorHandler);
+
 
 app.listen(port,()=>
 {
