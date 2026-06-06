@@ -1,15 +1,21 @@
 import express from 'express';
 import path from 'path';
-const app = express();
-const port = process.env.PORT || 8000;
 import posts from './routes/posts.js';
 import logger from './middleware/logger.js'
 import errorHandler from './middleware/error.js';
 import notFound from './middleware/notFound.js';
+import {fileURLToPath} from 'url';
 
+//Get the directory name 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const app = express();
+
+const port = process.env.PORT || 8000;
 //setup static  folder
 
-// app.use(express.static(path.join(__dirname,'public')));
+app.use(express.static(path.join(__dirname,'public')));
 
 // app.get('/',(req,res)=>{
 //     // res.send({message:'Hello World'});
